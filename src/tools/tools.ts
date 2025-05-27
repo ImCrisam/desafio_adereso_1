@@ -1,6 +1,6 @@
 import z from "zod";
-import { getPokemon, getSwapiPeople, getSwapiPlanet } from "../conexions/ApisExternal";
-import { server } from "../index.mcp";
+import { getPokemon, getSwapiPeople, getSwapiPlanet } from "../conexions/ApisExternal.ts";
+import { server } from "../index.ts";
 
 server.tool(
 "get-people-starwars",
