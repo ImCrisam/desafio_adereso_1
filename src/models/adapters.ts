@@ -1,4 +1,4 @@
-import { Pokemon, StarWarsCharacter, StarWarsPlanet } from "./models"
+import { Pokemon, StarWarsCharacter, StarWarsPlanet } from "./models.js"
 
 
 function parseNumberOrNull(value: any): number | null {

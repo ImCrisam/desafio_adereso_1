@@ -1,4 +1,4 @@
-import { validatePokemon, validateStarWarsCharacter, validateStarWarsPlanet } from "../models/adapters";
+import { validatePokemon, validateStarWarsCharacter, validateStarWarsPlanet } from "../models/adapters.js";
 import axios from "axios";
 
 

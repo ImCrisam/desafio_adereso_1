@@ -1,7 +1,7 @@
-import { problemTest } from "../src/models/models";
 import axios from "axios";
+import { problemTest } from "../models/models.js";
+import { aiPrompt } from "../pormpts/promptbase.js";
 
-import { aiPrompt } from "../src/pormpts/promptbase";
 
 const API_TOKEN = process.env.API_TOKEN
 const SUBMIT_ENDPOINT = process.env.SUBMIT_ENDPOINT ?? ""
