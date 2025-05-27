@@ -46,7 +46,7 @@ export async function getProblemStart(signal?: AbortSignal) {
   }
 }
 
-export async function getProblemTest(signal?: AbortSignal): Promise<problemTest> {
+export async function getProblemTest(signal?: AbortSignal): Promise<problemTest | undefined> {
   try {
     const response = await axios.get(TEST_ENDPOINT, {
       signal,

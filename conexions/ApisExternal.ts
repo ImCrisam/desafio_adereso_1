@@ -7,7 +7,7 @@ const SWAPI = "https://swapi.dev/api";
 const POKEAPI = "https://pokeapi.co/api/v2";
 
 
-async function getSwapiPeople(name: string, signal?: AbortSignal): Promise<any> {
+export async function getSwapiPeople(name: string, signal?: AbortSignal): Promise<any> {
   const url = `${SWAPI}/people?search=${name}`
   const response = await axios.get(url, { signal });
   const rest = validateStarWarsCharacter(response.data.results[0]);
@@ -17,7 +17,7 @@ async function getSwapiPeople(name: string, signal?: AbortSignal): Promise<any> 
   return rest
 }
 
-async function getSwapiPlanet(name: string, signal?: AbortSignal): Promise<any> {
+export async function getSwapiPlanet(name: string, signal?: AbortSignal): Promise<any> {
   const url = `${SWAPI}/planets?search=${name}`
   const response = await axios.get(url, { signal });
   const rest = validateStarWarsPlanet(response.data.results[0]);
@@ -28,7 +28,7 @@ async function getSwapiPlanet(name: string, signal?: AbortSignal): Promise<any> 
 
 }
 
-async function getPokemon(name: string, signal?: AbortSignal ): Promise<any> {
+export async function getPokemon(name: string, signal?: AbortSignal ): Promise<any> {
   const url = `${POKEAPI}/pokemon/${name}`
   const response = await axios.get(url, { signal });
   const rest = validatePokemon(response.data);
