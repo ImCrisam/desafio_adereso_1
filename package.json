@@ -11,7 +11,8 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc && chmod 755 build/index.js",
+    "build": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_NO_WARNINGS=1 tsc && chmod 755 build/index.js",
+    "dev": "npm run build && npx @modelcontextprotocol/inspector ts-node build/index.js",
     "start_asddsad": "npx --node-options='--env-file=.env' ts-node index.ts",
     "test": "npx ts-node -r dotenv/config index.ts"
   },

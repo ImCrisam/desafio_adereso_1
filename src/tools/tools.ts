@@ -1,62 +1,79 @@
 import z from "zod";
 import { getPokemon, getSwapiPeople, getSwapiPlanet } from "../conexions/ApisExternal.js";
-import { server } from "../index.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
+export function createTools(server: McpServer) {
 
-server.tool(
-"get-people-starwars",
-"obtener atributos de una persona de el mundo de star wars",
-{
-    state: z.string().describe("nombre base sin cualquier título, rango o honorífico"),
-},
+  server.tool(
+    "get-people-starwars",
+    "obtener atributos de una persona de el mundo de star wars",
+    {
+      state: z.string().describe("nombre base sin cualquier título, rango o honorífico"),
+    },
 
-( async (state:any) => {
-    const people = await getSwapiPeople(state)
-    return {
+    (async (state: any) => {
+      const people = await getSwapiPeople(state)
+      return {
         content: [
           {
             type: "text",
-            text: people,
+            text: JSON.stringify(people),
           },
         ],
       };
-})
-)
+    })
+  )
 
-server.tool(
-  "get-planet-starwars",
-  "obtener atributos de un planeta del mundo de star wars",
-  {
-    state: z.string().describe("nombre base del planeta sin traducciones ni decoraciones"),
-  },
-  async ({ state }: { state: string }) => {
-    const planet = await getSwapiPlanet(state);
-     return {
+  server.tool(
+    "get-planet-starwars",
+    "obtener atributos de un planeta del mundo de star wars",
+    {
+      state: z.string().describe("nombre base del planeta sin traducciones ni decoraciones"),
+    },
+    async ({ state }: { state: string }) => {
+
+      const planet = await getSwapiPlanet(state, undefined);
+
+      if (!planet) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `No se encontró información sobre el planeta "${JSON.stringify(state)}".`,
+            },
+          ],
+        };
+      }
+
+
+      return {
         content: [
           {
             type: "text",
-            text: planet,
+            text: JSON.stringify(planet),
           },
         ],
       };
-  }
-);
+    }
+  );
 
-server.tool(
-  "get-pokemon",
-  "obtener atributos de un pokémon",
-  {
-    state: z.string().describe("nombre del pokémon en minúsculas"),
-  },
-  async ({ state }: { state: string }) => {
-    const pokemon = await getPokemon(state);
-    return {
+  server.tool(
+    "get-pokemon",
+    "obtener atributos de un pokémon",
+    {
+      state: z.string().describe("nombre del pokémon en minúsculas"),
+    },
+    async ({ state }: { state: string }) => {
+
+      const pokemon = await getPokemon(state);
+      return {
         content: [
           {
             type: "text",
-            text: pokemon,
+            text: JSON.stringify(pokemon),
           },
         ],
       };
-  }
-);
+    }
+  );
+}

@@ -1,4 +1,4 @@
-import { fetchMap } from "../conexions/ApisExternal";
+import { fetchMap } from "../conexions/ApisExternal.js";
 
 
 
@@ -25,7 +25,7 @@ export async function resolveTaggedAndUntaggedEntities(
       try {
         const result = await fetchFn(search);
         resultMap.set(key, result)
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.code);
         
       }
@@ -64,7 +64,7 @@ export async function resolveEntitiesWithSaving(
       try {
         const result = await fetchFn(search, signal);
         mapEntities.set(key, result)
-      } catch (error) {
+      } catch (error:any) {
         console.log(error.code);
         
       }
